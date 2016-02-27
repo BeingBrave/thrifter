@@ -31,8 +31,7 @@
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="141dp"
-        android:background="@color/ui_appBar" />
+        android:layout_marginBottom="141dp" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
