@@ -60,20 +60,14 @@ public class IdentifiersDataSource {
      * @param identifier
      */
     public void deleteIdentifier(Identifier identifier) {
-<<<<<<< HEAD
-        int index = identifier.getIndex();
-        System.out.println("Identifier deleted with id: " + index);
-
-        // calls delete method defined by SQLiteDatabase, with arguments (which table, which row, null)
-        // which row is identified as "select by column + item in that column"
-        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_INDEX
-                + " = " + index, null);
-=======
         //long id = identifier.getId();
         //System.out.println("Identifier deleted with id: " + id);
         //database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_INDEX
         //        + " = " + id, null);
->>>>>>> 004aae6... Fixed marcellos broken stuff
+        long id = identifier.getIndex();
+        System.out.println("Identifier deleted with id: " + id);
+        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_INDEX
+                + " = " + id, null);
     }
 
     public List<Identifier> getAllIdentifiers() {
@@ -94,9 +88,9 @@ public class IdentifiersDataSource {
     }
 
     private Identifier cursorToIdentifier(Cursor cursor) {
-        //Identifier identifier = new Identifier();
-        //identifier.setId(cursor.getLong(0));
-        //identifier.setIdentifier(cursor.getString(1));
-        return null;
+        Identifier identifier = new Identifier();
+        identifier.setIndex(cursor.getInt(0));
+        identifier.setIdentifier(cursor.getString(1));
+        return identifier;
     }
 }
