@@ -12,6 +12,8 @@ public class Identifier {
     private int index; // the row index in the row
     private String identifier; // the item ID in the row
 
+    // TODO: Figure out if "index" is an unnecessary column (keep it for now)
+
     /**
      * Method for returning the index of this data element
      * @return index

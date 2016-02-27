@@ -8,7 +8,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-
+/**
+ * This is the class the app interacts with directly to put data into the database
+ * and get data out of it. In turn this class interacts with ItemIDHelper (an SQLiteOpenHelper
+ * subclass) and Identifier (a class defining objects that essentially represent a single row
+ * in the database table)
+ */
 public class IdentifiersDataSource {
 
     // creates the database object
@@ -97,9 +102,9 @@ public class IdentifiersDataSource {
     }
 
     /**
-     * Creates a new identifier object
-     * @param cursor
-     * @return
+     * Creates a new identifier object based on the one a cursor argument points to
+     * @param cursor object
+     * @return identifier object
      */
     private Identifier cursorToIdentifier(Cursor cursor) {
         // creates a new identifier object to be returned
