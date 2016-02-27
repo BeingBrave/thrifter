@@ -11,6 +11,11 @@
     <string name="facebook_app_id">535250303303111</string>
 
     <string name="title_activity_result">ResultActivity</string>
-    <string name="title_activity_starred">StarredActivity</string>
-    <string name="title_activity_test">TestActivity</string>
+    <string name="title_activity_starred">ResultActivity</string>
+
+    <!-- String related to data storage -->
+    <string name="preferences_key_itemID">Item ID File Key</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
