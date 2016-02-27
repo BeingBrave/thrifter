@@ -32,9 +32,13 @@
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
 
+        <meta-data
+            android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id" />
+
         <activity
-            android:name=".TestActivity"
-            android:label="@string/title_activity_test"
+            android:name=".ResultActivity"
+            android:label="@string/title_activity_result"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
