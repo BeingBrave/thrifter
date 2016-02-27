@@ -10,8 +10,8 @@ public class ItemIDHelper extends SQLiteOpenHelper {
     public static final String COLUMN_INDEX = "_id"; // column containing the row index
     public static final String COLUMN_IDENTIFIER = "identifier"; // column containing the item IDs
 
-    private static final String DATABASE_NAME = "itemID.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final String DATABASE_NAME = "itemID.db"; // name of database
+    private static final int DATABASE_VERSION = 1; // version of database
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "

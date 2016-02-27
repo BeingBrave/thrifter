@@ -29,13 +29,18 @@ public class IdentifiersDataSource {
         dbHelper.close();
     }
 
-    public Identifier createIdentifier(String comment) {
+    /**
+     *
+     * @param identifier
+     * @return
+     */
+    public Identifier createIdentifier(String identifier) {
         ContentValues values = new ContentValues();
-        values.put(ItemIDHelper.COLUMN_COMMENT, comment);
+        values.put(ItemIDHelper.COLUMN_IDENTIFIER, identifier);
         long insertId = database.insert(ItemIDHelper.TABLE_NAME, null,
                 values);
         Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
-                allColumns, ItemIDHelper.COLUMN_ID + " = " + insertId, null,
+                allColumns, ItemIDHelper.COLUMN_INDEX + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
         Identifier newIdentifier = cursorToIdentifier(cursor);
