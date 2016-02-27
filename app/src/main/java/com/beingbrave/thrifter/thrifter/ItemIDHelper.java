@@ -6,17 +6,17 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class ItemIDHelper extends SQLiteOpenHelper {
 
-    public static final String TABLE_NAME = "itemTable";
-    public static final String COLUMN_ID = "_id";
-    public static final String COLUMN_COMMENT = "comment";
+    public static final String TABLE_NAME = "itemTable"; // name of the table
+    public static final String COLUMN_INDEX = "_id"; // column containing the row index
+    public static final String COLUMN_IDENTIFIER = "identifier"; // column containing the item IDs
 
     private static final String DATABASE_NAME = "itemID.db";
     private static final int DATABASE_VERSION = 1;
 
     // Database creation sql statement
     private static final String DATABASE_CREATE = "create table "
-            + TABLE_NAME + "(" + COLUMN_ID
-            + " integer primary key autoincrement, " + COLUMN_COMMENT
+            + TABLE_NAME + "(" + COLUMN_INDEX
+            + " integer primary key autoincrement, " + COLUMN_IDENTIFIER
             + " text not null);";
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
 

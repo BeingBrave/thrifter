@@ -14,8 +14,8 @@ public class IdentifiersDataSource {
     // Database fields
     private SQLiteDatabase database;
     private ItemIDHelper dbHelper;
-    private String[] allColumns = { ItemIDHelper.COLUMN_ID,
-            ItemIDHelper.COLUMN_COMMENT };
+    private String[] allColumns = { ItemIDHelper.COLUMN_INDEX,
+            ItemIDHelper.COLUMN_IDENTIFIER };
 
     public IdentifiersDataSource(Context context) {
         dbHelper = new ItemIDHelper(context);
