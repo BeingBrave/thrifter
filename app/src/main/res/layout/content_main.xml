@@ -47,7 +47,7 @@
 </RelativeLayout>
 =======
         android:layout_alignParentStart="true"
-        android:drawableRight="@android:drawable/ic_menu_search"
+        android:drawableRight="@drawable/ic_search_black_24dp"
         android:singleLine="true" />
 
     <TextView
