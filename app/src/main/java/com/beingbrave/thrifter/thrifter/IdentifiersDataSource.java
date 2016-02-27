@@ -120,7 +120,7 @@ public class IdentifiersDataSource {
         Identifier identifier = new Identifier();
         // sets the identifier object's index field to the int found in column 0
         identifier.setIndex(cursor.getInt(0));
-        // sets the identifier object's identifier field to the int found in column 1
+        // sets the identifier object's identifier field to the String found in column 1
         identifier.setIdentifier(cursor.getString(1));
         // returns the new identifier object which will be added to the ArrayList
         return identifier;
