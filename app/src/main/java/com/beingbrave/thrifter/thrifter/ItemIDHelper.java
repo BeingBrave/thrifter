@@ -28,7 +28,7 @@ public class ItemIDHelper extends SQLiteOpenHelper {
             + " integer primary key autoincrement, " + COLUMN_COMMENT
             + " text not null);";
 
-    public MySQLiteHelper(Context context) {
+    public ItemIDHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -39,7 +39,7 @@ public class ItemIDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        Log.w(MySQLiteHelper.class.getName(),
+        Log.w(ItemIDHelper.class.getName(),
                 "Upgrading database from version " + oldVersion + " to "
                         + newVersion + ", which will destroy all old data");
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_COMMENTS);
