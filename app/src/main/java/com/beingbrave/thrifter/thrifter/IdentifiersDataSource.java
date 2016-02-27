@@ -2,14 +2,14 @@ package com.beingbrave.thrifter.thrifter;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 
-public class CommentsDataSource {
+
+public class IdentifiersDataSource {
 
     // Database fields
     private SQLiteDatabase database;
@@ -17,7 +17,7 @@ public class CommentsDataSource {
     private String[] allColumns = { ItemIDHelper.COLUMN_ID,
             ItemIDHelper.COLUMN_COMMENT };
 
-    public CommentsDataSource(Context context) {
+    public IdentifiersDataSource(Context context) {
         dbHelper = new ItemIDHelper(context);
     }
 
@@ -29,49 +29,49 @@ public class CommentsDataSource {
         dbHelper.close();
     }
 
-    public Comment createComment(String comment) {
+    public Identifier createIdentifier(String comment) {
         ContentValues values = new ContentValues();
         values.put(ItemIDHelper.COLUMN_COMMENT, comment);
-        long insertId = database.insert(ItemIDHelper.TABLE_COMMENTS, null,
+        long insertId = database.insert(ItemIDHelper.TABLE_NAME, null,
                 values);
-        Cursor cursor = database.query(ItemIDHelper.TABLE_COMMENTS,
+        Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
                 allColumns, ItemIDHelper.COLUMN_ID + " = " + insertId, null,
                 null, null, null);
         cursor.moveToFirst();
-        Comment newComment = cursorToComment(cursor);
+        Identifier newIdentifier = cursorToIdentifier(cursor);
         cursor.close();
-        return newComment;
+        return newIdentifier;
     }
 
-    public void deleteComment(Comment comment) {
-        long id = comment.getId();
-        System.out.println("Comment deleted with id: " + id);
-        database.delete(ItemIDHelper.TABLE_COMMENTS, ItemIDHelper.COLUMN_ID
+    public void deleteIdentifier(Identifier identifier) {
+        long id = identifier.getId();
+        System.out.println("Identifier deleted with id: " + id);
+        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_ID
                 + " = " + id, null);
     }
 
-    public List<Comment> getAllComments() {
-        List<Comment> comments = new ArrayList<Comment>();
+    public List<Identifier> getAllIdentifiers() {
+        List<Identifier> identifiers = new ArrayList<Identifier>();
 
-        Cursor cursor = database.query(ItemIDHelper.TABLE_COMMENTS,
+        Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
                 allColumns, null, null, null, null, null);
 
         cursor.moveToFirst();
         while (!cursor.isAfterLast()) {
-            Comment comment = cursorToComment(cursor);
-            comments.add(comment);
+            Identifier identifier = cursorToIdentifier(cursor);
+            identifiers.add(identifier);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
-        return comments;
+        return identifiers;
     }
 
-    private Comment cursorToComment(Cursor cursor) {
-        Comment comment = new Comment();
-        comment.setId(cursor.getLong(0));
-        comment.setComment(cursor.getString(1));
-        return comment;
+    private Identifier cursorToIdentifier(Cursor cursor) {
+        Identifier identifier = new Identifier();
+        identifier.setId(cursor.getLong(0));
+        identifier.setComment(cursor.getString(1));
+        return identifier;
     }
 }
 
