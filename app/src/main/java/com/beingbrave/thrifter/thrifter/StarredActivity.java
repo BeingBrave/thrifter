@@ -10,8 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 
 public class StarredActivity extends AppCompatActivity {
 
