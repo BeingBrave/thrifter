@@ -16,7 +16,6 @@ public class IdentifiersDataSource {
     // creates database helper object
     private ItemIDHelper dbHelper;
     // convenience array, holds the names of both columns in its two cells
-    // used by the method that returns all data held in database
     private String[] allColumns = { ItemIDHelper.COLUMN_INDEX,
             ItemIDHelper.COLUMN_IDENTIFIER };
 
