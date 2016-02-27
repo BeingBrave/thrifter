@@ -20,4 +20,5 @@
         completions."
     </string>
     <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_starred">StarredActivity</string>
 </resources>
