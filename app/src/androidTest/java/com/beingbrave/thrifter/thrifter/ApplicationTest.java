@@ -2,6 +2,8 @@ package com.beingbrave.thrifter.thrifter;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;
+
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -15,5 +17,8 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
         dataShit.open();
 
         dataShit.createIdentifier("gayshit");
+
+        List<Identifier> identifiers = dataShit.getAllIdentifiers();
+        System.out.println(identifiers.get(0));
     }
 }

@@ -48,7 +48,7 @@ public class IdentifiersDataSource {
     /**
      *
      * @param identifier
-     * @return
+     * @return first row identifier object
      */
     public void createIdentifier(String identifier) {
         ContentValues values = new ContentValues();
