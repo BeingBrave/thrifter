@@ -89,7 +89,7 @@ public class IdentifiersDataSource {
 
     private Identifier cursorToIdentifier(Cursor cursor) {
         Identifier identifier = new Identifier();
-        identifier.setIndex(cursor.getInt(0));
+        identifier.setIndex(cursor.getLong(0));
         identifier.setIdentifier(cursor.getString(1));
         return identifier;
     }
