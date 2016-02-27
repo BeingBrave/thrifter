@@ -31,18 +31,6 @@
         <activity
             android:name=".LoginActivity"
             android:label="@string/title_activity_login" />
-        <activity
-            android:name=".ResultActivity"
-            android:label="@string/title_activity_result"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".StarredActivity"
-            android:label="@string/title_activity_starred"
-            android:theme="@style/AppTheme.NoActionBar" />
-
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
 
         <activity
             android:name=".TestActivity"
