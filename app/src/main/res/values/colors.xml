@@ -11,7 +11,7 @@
     <color name="text_tag">#2D2D2D</color>
 
     <!--colours needed for android studio-->
-    <color name="colorPrimary">#81C8B3</color> <!--colour of app bar-->
+    <color name="colorPrimary">#DDDDDD</color> <!--colour of app bar-->
     <color name="colorPrimaryDark">#B2B2B2</color> <!--colour of status bar-->
     <color name="colorAccent">#81C8B3</color>
 </resources>

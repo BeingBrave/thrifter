@@ -4,12 +4,22 @@
     android:layout_height="match_parent"
     android:id="@+id/layout">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Thrifter         "
+        android:textAlignment="center"
+        android:textSize="11pt"
+        android:textColor="@color/colorAccent" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_message_black_24dp"
-        android:layout_marginRight="14dp" />
+        android:src="@drawable/ic_message_black_24dp2"
+        android:layout_marginRight="14dp"
+        android:maxHeight="10dp"
+        android:maxWidth="10dp" />
 </RelativeLayout>
