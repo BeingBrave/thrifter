@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    DatabaseHelper(Context context, String name, int version){
+        super(context, name, null, version);
+
+    }
 
     /**
      * Called on initial creation of database
@@ -18,4 +22,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase database){
 
     }
+
+    /**
+     * Called when database needs to be upgraded
+     */
+    @Override
+    public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion){
+
+    }
+
 }
