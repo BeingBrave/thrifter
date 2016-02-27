@@ -32,6 +32,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.facebook.FacebookSdk;
+
 import static android.Manifest.permission.READ_CONTACTS;
 
 /**
