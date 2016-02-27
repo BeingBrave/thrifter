@@ -45,8 +45,8 @@
             android:value="@string/facebook_app_id" />
 
         <activity
-            android:name=".UploadActivity"
-            android:label="@string/title_activity_upload"
+            android:name=".TestActivity"
+            android:label="@string/title_activity_test"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

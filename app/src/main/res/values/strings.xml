@@ -12,5 +12,5 @@
 
     <string name="title_activity_result">ResultActivity</string>
     <string name="title_activity_starred">StarredActivity</string>
-    <string name="title_activity_upload">UploadActivity</string>
+    <string name="title_activity_test">TestActivity</string>
 </resources>
