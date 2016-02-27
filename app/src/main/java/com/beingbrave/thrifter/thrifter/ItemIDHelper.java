@@ -4,20 +4,29 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+/**
+ * Class containing names and various definitions for the database
+ */
 public class ItemIDHelper extends SQLiteOpenHelper {
 
-    public static final String TABLE_NAME = "itemTable"; // SQL name of table
-    public static final String COLUMN_INDEX = "_id"; // SQL name of column containing row index
-    public static final String COLUMN_IDENTIFIER = "identifier"; // SQL name of column containing item IDs
+    // SQL name of table
+    public static final String TABLE_NAME = "itemTable";
+    // SQL name of column containing row index
+    public static final String COLUMN_INDEX = "_id";
+    // SQL name of column containing item IDs
+    public static final String COLUMN_IDENTIFIER = "identifier";
 
-    private static final String DATABASE_NAME = "itemID.db"; // name of database
-    private static final int DATABASE_VERSION = 1; // version of database
+    // name of database
+    private static final String DATABASE_NAME = "ItemID.db";
+    // version of database, no idea what this is for
+    private static final int DATABASE_VERSION = 1;
 
-    // Database creation sql statement
+    // SQL statement defining how the database is created
     private static final String DATABASE_CREATE = "create table "
             + TABLE_NAME + "(" + COLUMN_INDEX
             + " integer primary key autoincrement, " + COLUMN_IDENTIFIER
             + " text not null);";
+    // SQL statement defining how a table is deleted
     private static final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
     public ItemIDHelper(Context context) {
@@ -26,8 +35,7 @@ public class ItemIDHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        // execSQL executes a single database statement, in this case the one defined as
-        // DATABASE_CREATE
+        // SQLiteOpenHelper objects simplify database creation
         database.execSQL(DATABASE_CREATE);
     }
 

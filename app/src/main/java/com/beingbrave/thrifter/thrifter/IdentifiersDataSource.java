@@ -50,22 +50,25 @@ public class IdentifiersDataSource {
      * @param identifier
      * @return
      */
-    public Identifier createIdentifier(int identifier) {
+    public void createIdentifier(String identifier) {
         ContentValues values = new ContentValues();
 
         // Adds data to the ContentValues data set
         values.put(ItemIDHelper.COLUMN_IDENTIFIER, identifier);
 
-        //
+        // inserts new row into database, returns row ID long
         long insertId = database.insert(ItemIDHelper.TABLE_NAME, null,
                 values);
-        Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
+        // query the data table, returns both columns,
+        /* Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
                 allColumns, ItemIDHelper.COLUMN_INDEX + " = " + insertId, null,
                 null, null, null);
+        // move cursor to first row
         cursor.moveToFirst();
         Identifier newIdentifier = cursorToIdentifier(cursor);
+        // close cursor
         cursor.close();
-        return newIdentifier;
+        return newIdentifier; */
     }
 
     /**
