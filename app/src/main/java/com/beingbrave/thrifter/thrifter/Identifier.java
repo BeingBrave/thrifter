@@ -3,26 +3,42 @@ package com.beingbrave.thrifter.thrifter;
 import android.provider.BaseColumns;
 
 /**
- * "Model" class containing the data
+ * Class defining objects that model data in the database.
  * @author Marcello
  */
 
 public class Identifier {
-    private long index;
-    private String identifier;
+    private int index; // the row index in the row
+    private String identifier; // the item ID in the row
 
-    public long getId() {
+    /**
+     * Method for returning the index of this data element
+     * @return index
+     */
+    public int getIndex() {
         return index;
     }
 
-    public void setId(long index) {
+    /**
+     * Method for setting the index of this data element
+     * @param index
+     */
+    public void setIndex(int index) {
         this.index = index;
     }
 
+    /**
+     * Method for returning the actual item ID held by the data object
+     * @return identifier
+     */
     public String getIdentifier() {
         return identifier;
     }
 
+    /**
+     * Method for setting the item ID held by the data object
+     * @param identifier
+     */
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }

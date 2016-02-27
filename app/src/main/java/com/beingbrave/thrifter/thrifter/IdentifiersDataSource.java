@@ -57,7 +57,7 @@ public class IdentifiersDataSource {
      * @param identifier
      */
     public void deleteIdentifier(Identifier identifier) {
-        long index = identifier.getId();
+        int index = identifier.getIndex();
         System.out.println("Identifier deleted with id: " + index);
 
         // calls delete method defined by SQLiteDatabase, with arguments (which table, which row, null)
@@ -84,10 +84,9 @@ public class IdentifiersDataSource {
     }
 
     private Identifier cursorToIdentifier(Cursor cursor) {
-        //Identifier identifier = new Identifier();
-        //identifier.setId(cursor.getLong(0));
-        //identifier.setComment(cursor.getString(1));
-        //return identifier;
-        return null;
+        Identifier identifier = new Identifier();
+        identifier.setIndex(cursor.getInt(0));
+        identifier.setIdentifier(cursor.getString(1));
+        return identifier;
     }
 }
