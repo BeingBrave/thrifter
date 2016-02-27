@@ -11,15 +11,10 @@ import android.view.View;
 
 public class ResultActivity extends AppCompatActivity {
 
-    // SQLiteOpenHelper object, used to access database
-    ItemIDHelper itemIDhelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // create database object
-        itemIDhelper = new ItemIDHelper(getApplicationContext());
 
         setContentView(R.layout.activity_result);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
