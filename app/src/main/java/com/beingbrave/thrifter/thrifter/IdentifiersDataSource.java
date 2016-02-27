@@ -34,11 +34,13 @@ public class IdentifiersDataSource {
      * @param identifier
      * @return
      */
-    public Identifier createIdentifier(String identifier) {
+    public Identifier createIdentifier(int identifier) {
         ContentValues values = new ContentValues();
 
-        // puts an identifier in the column called COLUMN_IDENTIFIER
+        // Adds data to the ContentValues data set
         values.put(ItemIDHelper.COLUMN_IDENTIFIER, identifier);
+
+        //
         long insertId = database.insert(ItemIDHelper.TABLE_NAME, null,
                 values);
         Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
@@ -50,11 +52,18 @@ public class IdentifiersDataSource {
         return newIdentifier;
     }
 
+    /**
+     * Method for deleting an identifier from the database
+     * @param identifier
+     */
     public void deleteIdentifier(Identifier identifier) {
-        long id = identifier.getId();
-        System.out.println("Identifier deleted with id: " + id);
-        //database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_ID
-        //        + " = " + id, null);
+        long index = identifier.getId();
+        System.out.println("Identifier deleted with id: " + index);
+
+        // calls delete method defined by SQLiteDatabase, with arguments (which table, which row, null)
+        // which row is identified as "select by column + item in that column"
+        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_INDEX
+                + " = " + index, null);
     }
 
     public List<Identifier> getAllIdentifiers() {
@@ -82,4 +91,3 @@ public class IdentifiersDataSource {
         return null;
     }
 }
-
