@@ -4,6 +4,7 @@ import android.provider.BaseColumns;
 
 /**
  * Class defining objects that model data in the database.
+ * Essentially represents a single row in the database table.
  * @author Marcello
  */
 

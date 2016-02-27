@@ -55,7 +55,7 @@ public class IdentifiersDataSource {
     }
 
     /**
-     * Method for deleting an identifier from the database
+     * Method for deleting an identifier object
      * @param identifier
      */
     public void deleteIdentifier(Identifier identifier) {
@@ -69,27 +69,46 @@ public class IdentifiersDataSource {
                 + " = " + id, null);
     }
 
+
     public List<Identifier> getAllIdentifiers() {
+        // ArrayList that holds all identifier objects
         List<Identifier> identifiers = new ArrayList<Identifier>();
 
+        // Cursors hold data read out of database, fetched using the query() method
+        // method arguments: table from which to fetch, array of columns from which to fetch,
+        // and then a whole bunch of selection criteria that are unnecessary in this case
         Cursor cursor = database.query(ItemIDHelper.TABLE_NAME,
                 allColumns, null, null, null, null, null);
 
+        // move the cursor to the first row
         cursor.moveToFirst();
+        // iterates over rows
         while (!cursor.isAfterLast()) {
+            // create new identifier object with the values in the identifier object the cursor points to
             Identifier identifier = cursorToIdentifier(cursor);
+            // add identifier to ArrayList
             identifiers.add(identifier);
             cursor.moveToNext();
         }
         // make sure to close the cursor
         cursor.close();
+        // return ArrayList with all identifier objects
         return identifiers;
     }
 
+    /**
+     * Creates a new identifier object
+     * @param cursor
+     * @return
+     */
     private Identifier cursorToIdentifier(Cursor cursor) {
+        // creates a new identifier object to be returned
         Identifier identifier = new Identifier();
+        // sets the identifier object's index field to the int found in column 0
         identifier.setIndex(cursor.getInt(0));
+        // sets the identifier object's identifier field to the int found in column 1
         identifier.setIdentifier(cursor.getString(1));
+        // returns the new identifier object which will be added to the ArrayList
         return identifier;
     }
 }
