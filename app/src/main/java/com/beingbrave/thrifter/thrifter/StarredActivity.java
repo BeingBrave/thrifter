@@ -14,16 +14,9 @@ import java.io.FileNotFoundException;
 
 public class StarredActivity extends AppCompatActivity {
 
-    // Gets a handle for shared preferences
-    Context context = StarredActivity.this;
-    SharedPreferences sharedPref = context.getSharedPreferences(
-            getString(R.string.preferences_key_itemID), Context.MODE_PRIVATE);
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setContentView(R.layout.activity_starred);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
