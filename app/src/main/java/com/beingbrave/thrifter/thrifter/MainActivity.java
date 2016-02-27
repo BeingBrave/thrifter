@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     // SQLiteOpenHelper object, used to access database
-    ItemIDHelper itemIDhelper;
+    public ItemIDHelper itemIDhelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

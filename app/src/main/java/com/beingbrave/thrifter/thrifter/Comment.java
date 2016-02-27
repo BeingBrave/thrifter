@@ -5,13 +5,42 @@ import android.provider.BaseColumns;
 /**
  * @author Marcello
  */
-public final class ItemIDContract {
 
-    // empty constructor to prevent instantiation
-    public ItemIDContract(){
+public class Comment {
+    private long id;
+    private String comment;
+
+    public long getId() {
+        return id;
     }
 
-    /** Inner class the defines the table contents */
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
+    }
+
+    // Will be used by the ArrayAdapter in the ListView
+    @Override
+    public String toString() {
+        return comment;
+    }
+}
+
+/*
+public final class Comment {
+
+    // empty constructor to prevent instantiation
+    public Comment(){
+    }
+
+    // Inner class the defines the table contents
     public static abstract class FeedEntry implements BaseColumns{
         public static final String TABLE_NAME = "entry";
         public static final String COLUMN_NAME_ENTRY_ID = "entryid";
@@ -32,3 +61,4 @@ public final class ItemIDContract {
                 "DROP TABLE IF EXISTS " + FeedEntry.TABLE_NAME;
     }
 }
+*/

@@ -2,6 +2,7 @@ package com.beingbrave.thrifter.thrifter;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
