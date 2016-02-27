@@ -11,5 +11,7 @@
     <string name="facebook_app_id">535250303303111</string>
 
     <string name="title_activity_result">ResultActivity</string>
-    <string name="title_activity_starred">StarredActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
