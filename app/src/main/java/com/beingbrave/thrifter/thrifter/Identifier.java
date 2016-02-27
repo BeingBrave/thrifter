@@ -3,6 +3,7 @@ package com.beingbrave.thrifter.thrifter;
 import android.provider.BaseColumns;
 
 /**
+ * "Model" class containing the data
  * @author Marcello
  */
 
@@ -18,11 +19,11 @@ public class Identifier {
         this.index = index;
     }
 
-    public String getidentifier() {
+    public String getIdentifier() {
         return identifier;
     }
 
-    public void setidentifier(String identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 

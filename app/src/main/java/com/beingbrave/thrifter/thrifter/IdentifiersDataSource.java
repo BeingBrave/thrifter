@@ -30,12 +30,14 @@ public class IdentifiersDataSource {
     }
 
     /**
-     *
+     * Method for adding an item identifier to the database
      * @param identifier
      * @return
      */
     public Identifier createIdentifier(String identifier) {
         ContentValues values = new ContentValues();
+
+        // puts an identifier in the column called COLUMN_IDENTIFIER
         values.put(ItemIDHelper.COLUMN_IDENTIFIER, identifier);
         long insertId = database.insert(ItemIDHelper.TABLE_NAME, null,
                 values);
@@ -51,7 +53,7 @@ public class IdentifiersDataSource {
     public void deleteIdentifier(Identifier identifier) {
         long id = identifier.getId();
         System.out.println("Identifier deleted with id: " + id);
-        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_ID
+        database.delete(ItemIDHelper.TABLE_NAME, ItemIDHelper.COLUMN_INDEX
                 + " = " + id, null);
     }
 
@@ -72,10 +74,15 @@ public class IdentifiersDataSource {
         return identifiers;
     }
 
+    /**
+     *
+     * @param cursor
+     * @return
+     */
     private Identifier cursorToIdentifier(Cursor cursor) {
         Identifier identifier = new Identifier();
         identifier.setId(cursor.getLong(0));
-        identifier.setComment(cursor.getString(1));
+        identifier.setIdentifier(cursor.getString(1));
         return identifier;
     }
 }
