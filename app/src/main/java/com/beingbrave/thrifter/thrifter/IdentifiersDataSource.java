@@ -12,7 +12,16 @@ import android.database.sqlite.SQLiteDatabase;
  * This is the class the app interacts with directly to put data into the database
  * and get data out of it. In turn this class interacts with ItemIDHelper (an SQLiteOpenHelper
  * subclass) and Identifier (a class defining objects that essentially represent a single row
- * in the database table)
+ * in the database table).
+ *
+ * Use instructions:
+ *
+ * 1. Create an instance of this class with a context (getApplicationContext() maybe?)
+ * 2. Open the database with database.open()
+ * 3. Use createIdentifier and deleteIdentifier when adding or removing item IDs
+ * 4. use getAllIdentifiers to get an arraylist with all identifiers
+ * 5. Use ArrayList methods to extract item IDs out of the arrayList as needed
+ * 6. Close database with database.close()
  */
 public class IdentifiersDataSource {
 
