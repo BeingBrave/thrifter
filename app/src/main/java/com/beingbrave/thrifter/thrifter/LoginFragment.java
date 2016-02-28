@@ -33,7 +33,7 @@ public class LoginFragment extends Fragment {
         // Required empty public constructor
     }
 
-    public static LoginFragment newInstance() {
+    public static LoginFragment newInstance(LoginActivity loginActivity) {
         LoginFragment fragment = new LoginFragment();
         return fragment;
     }
@@ -62,7 +62,8 @@ public class LoginFragment extends Fragment {
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                String token = loginResult.getAccessToken().getToken();
+                ((LoginActivity) getActivity()).onToken(token);
             }
 
             @Override
@@ -85,16 +86,6 @@ public class LoginFragment extends Fragment {
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p/>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

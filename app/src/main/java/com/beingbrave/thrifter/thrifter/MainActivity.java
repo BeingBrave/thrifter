@@ -33,6 +33,9 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    private String appToken;
+
     private int[] tabIcons = {
             R.drawable.ic_search_black_24dp,
             R.drawable.ic_star_border_black_24dp,
@@ -132,6 +135,20 @@ public class MainActivity extends AppCompatActivity
     @Override
     public void onConnectionFailed(ConnectionResult result){
         mGoogleApiClient.disconnect();
+        if (savedInstanceState == null) {
+            Bundle extras = getIntent().getExtras();
+            if(extras == null) {
+                appToken = null;
+
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
+            } else {
+                appToken = extras.getString("TOKEN");
+            }
+        } else {
+            appToken = (String) savedInstanceState.getSerializable("TOKEN");
+        }
+        System.out.println(appToken);
     }
 
     @Override
