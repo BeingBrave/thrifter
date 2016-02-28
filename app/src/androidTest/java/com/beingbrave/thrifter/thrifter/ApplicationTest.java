@@ -14,7 +14,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
 
-        IdentifiersDataSource dataShit = new IdentifiersDataSource(getContext());
+        IdentifiersDataSource dataShit = new IdentifiersDataSource(getContext()); // actually needs to be "this"
         dataShit.open();
 
         dataShit.createIdentifier("gayshit");

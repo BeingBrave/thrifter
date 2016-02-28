@@ -22,6 +22,17 @@ import android.database.sqlite.SQLiteDatabase;
  * 4. use getAllIdentifiers to get an arraylist with all identifiers
  * 5. Use ArrayList methods to extract item IDs out of the arrayList as needed
  * 6. Close database with database.close()
+ *
+ * EXAMPLE CODE:
+ *
+ * IdentifiersDataSource dataShit = new IdentifiersDataSource(this);
+ * dataShit.open();
+ *
+ * dataShit.createIdentifier("gayshit");
+ *
+ * List<Identifier> identifiers = dataShit.getAllIdentifiers();
+ * System.out.println(identifiers.get(0));
+ * dataShit.close();
  */
 public class IdentifiersDataSource {
 
