@@ -1,6 +1,7 @@
 package com.beingbrave.thrifter.thrifter;
 
 import android.content.Context;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -18,11 +19,15 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        implements NavigationView.OnNavigationItemSelectedListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -32,11 +37,22 @@ public class MainActivity extends AppCompatActivity
             R.drawable.ic_star_border_black_24dp,
             R.drawable.ic_perm_identity_black_24dp
     };
+    private GoogleApiClient mGoogleApiClient;
+    private double[] coordinates = new double[2];
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create an instance of GoogleAPIClient.
+        if (mGoogleApiClient == null) {
+            mGoogleApiClient = new GoogleApiClient.Builder(this)
+                    .addConnectionCallbacks(this)
+                    .addOnConnectionFailedListener(this)
+                    .addApi(LocationServices.API)
+                    .build();
+        }
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,6 +82,45 @@ public class MainActivity extends AppCompatActivity
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
         setupTabIcons();
+    }
+
+    @Override
+    protected void onStart() {
+        mGoogleApiClient.connect();
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        mGoogleApiClient.disconnect();
+        super.onStop();
+    }
+
+    @Override
+    public void onConnected(Bundle connectionHint) {
+        try {
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
+                    mGoogleApiClient);
+
+            if (mLastLocation != null) {
+                coordinates[0] = mLastLocation.getLatitude();
+                coordinates[1] = mLastLocation.getLongitude();
+            }
+        }
+        catch(SecurityException exc){
+            coordinates[0] = -1;
+            coordinates[1] = -1;
+        }
+    }
+
+    @Override
+    public void onConnectionSuspended(int a){
+        mGoogleApiClient.disconnect();
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult result){
+        mGoogleApiClient.disconnect();
     }
 
     @Override
