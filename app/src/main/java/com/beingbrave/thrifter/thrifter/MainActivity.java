@@ -199,6 +199,11 @@ public class MainActivity extends AppCompatActivity
 //        });
     }
 
+    public void onSearchAnyClick(View view) {
+        Intent intent = new Intent(this, ResultActivity.class);
+        startActivity(intent);
+    }
+
     public void fabClick(View view) {
         Intent intent = new Intent(this, UploadActivity.class);
         startActivity(intent);
