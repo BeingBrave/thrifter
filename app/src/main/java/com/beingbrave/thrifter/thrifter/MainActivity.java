@@ -158,8 +158,8 @@ public class MainActivity extends AppCompatActivity
             if (extras == null) {
                 appToken = null;
 
-                //Intent intent = new Intent(this, LoginActivity.class);
-                //startActivity(intent);
+                Intent intent = new Intent(this, LoginActivity.class);
+                startActivity(intent);
             } else {
                 appToken = extras.getString("TOKEN");
             }
