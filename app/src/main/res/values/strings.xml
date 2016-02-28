@@ -16,6 +16,9 @@
     <!-- String related to data storage -->
     <string name="preferences_key_itemID">Item ID File Key</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_starred">ResultActivity</string>
+    <string name="title_activity_upload">UploadActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="title_activity_card">CardActivity</string>
 </resources>
