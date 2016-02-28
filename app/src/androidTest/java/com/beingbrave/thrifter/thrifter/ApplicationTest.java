@@ -1,6 +1,7 @@
 package com.beingbrave.thrifter.thrifter;
 
 import android.app.Application;
+import android.content.Context;
 import android.test.ApplicationTestCase;
 
 import java.util.List;
@@ -13,12 +14,13 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
 
-        IdentifiersDataSource dataShit = new IdentifiersDataSource(getContext());
+        IdentifiersDataSource dataShit = new IdentifiersDataSource(this);
         dataShit.open();
 
         dataShit.createIdentifier("gayshit");
 
         List<Identifier> identifiers = dataShit.getAllIdentifiers();
         System.out.println(identifiers.get(0));
+        dataShit.close();
     }
 }
