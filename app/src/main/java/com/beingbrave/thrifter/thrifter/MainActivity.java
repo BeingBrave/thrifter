@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity
     * has valid values.
     */
                 if (!hasFocus) {
-                 //create intent and start intent on listener add to button open new page
+                    //create intent and start intent on listener add to button open new page
                     Intent i = new Intent(getApplicationContext(), ResultActivity.class);
                     startActivity(i);
                 }
