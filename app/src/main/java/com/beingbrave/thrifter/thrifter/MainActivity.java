@@ -63,7 +63,8 @@ public class MainActivity extends AppCompatActivity
     private GoogleApiClient client;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -154,8 +155,8 @@ public class MainActivity extends AppCompatActivity
             if (extras == null) {
                 appToken = null;
 
-                Intent intent = new Intent(this, LoginActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(this, LoginActivity.class);
+                //startActivity(intent);
             } else {
                 appToken = extras.getString("TOKEN");
             }
@@ -176,27 +177,6 @@ public class MainActivity extends AppCompatActivity
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
         }
 
-//        EditText searchBar = (EditText) findViewById(R.id.search);
-//        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-//                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
-//                        actionId == EditorInfo.IME_ACTION_DONE ||
-//                        event.getAction() == KeyEvent.ACTION_DOWN &&
-//                                event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
-//                    if (!event.isShiftPressed()) {
-//                        // the user is done typing.
-//
-//                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
-//                        intent.putExtra("SEARCH", "test");
-//                        startActivity(intent);
-//
-//                        return true; // consume.
-//                    }
-//                }
-//                return false; // pass on to other listeners.
-//            }
-//        });
     }
 
     public void onSearchAnyClick(View view) {
