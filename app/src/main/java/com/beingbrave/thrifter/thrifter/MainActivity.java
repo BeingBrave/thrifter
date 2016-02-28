@@ -23,7 +23,6 @@ import android.view.View;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -103,18 +102,6 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onStart() {
-        mGoogleApiClient.connect();
-        super.onStart();
-    }
-
-    @Override
-    protected void onStop() {
-        mGoogleApiClient.disconnect();
-        super.onStop();
-    }
-
-    @Override
     public void onConnected(Bundle connectionHint) {
         try {
             Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(
@@ -174,6 +161,9 @@ public class MainActivity extends AppCompatActivity
     public void onStart() {
         super.onStart();
 
+        mGoogleApiClient.connect();
+        super.onStart();
+
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client.connect();
@@ -192,6 +182,9 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onStop() {
+        super.onStop();
+
+        mGoogleApiClient.disconnect();
         super.onStop();
 
         // ATTENTION: This was auto-generated to implement the App Indexing API.
