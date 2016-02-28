@@ -1,6 +1,7 @@
 package com.beingbrave.thrifter.thrifter;
 
 import android.app.ListFragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,9 +13,18 @@ import android.widget.ArrayAdapter;
 import android.widget.RadioButton;
 
 import com.beingbrave.thrifter.thrifter.R;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
-public class StarredFragment extends ListFragment {
+public class StarredFragment extends Fragment {
+
+    // ArrayList<String> itemNames = new ArrayList<String>(); // Item names to be passed on
 
     public StarredFragment() {
         // Required empty public constructor
@@ -23,8 +33,11 @@ public class StarredFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
     }
 
+    /*
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -38,4 +51,5 @@ public class StarredFragment extends ListFragment {
         setListAdapter(adapter);
         return rootView;
     }
+    */
 }

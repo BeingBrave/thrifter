@@ -62,6 +62,9 @@ public class MainActivity extends AppCompatActivity
      */
     private GoogleApiClient client;
 
+    // public IdentifiersDataSource dataShit; // the item ID database
+    // List<Identifier> identifiers; // item ID ArrayList
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -177,7 +180,28 @@ public class MainActivity extends AppCompatActivity
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
         }
 
+        /* Create and open database
+        dataShit = new IdentifiersDataSource(this);
+        dataShit.open();
+        identifiers = dataShit.getAllIdentifiers();
+        */
     }
+
+    /*
+    public void getItemIDString(String token) {
+
+        for (int i = 0; i < identifiers.size(); i++) {
+            Ion.with(getApplicationContext())
+                    .load("http://178.62.117.169:3333/item/" + identifiers.get(i) + "?access_token=" + appToken)
+                    .asJsonArray()
+                    .setCallback(new FutureCallback<JsonArray>() {
+                        @Override
+                        public void onCompleted(Exception e, JsonArray result) {
+                            itemNames.add(i, ((JsonObject) result.get(0)).get("name").toString());
+                        }
+                    });
+        }
+    } */
 
     public void onSearchAnyClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
@@ -218,45 +242,17 @@ public class MainActivity extends AppCompatActivity
         return false;
     }
 
+    /*
     @Override
-    public void onStart() {
-        super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.beingbrave.thrifter.thrifter/http/host/path")
-        );
-        AppIndex.AppIndexApi.start(client, viewAction);
+    public void onStop(){
+        dataShit.close();
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        Action viewAction = Action.newAction(
-                Action.TYPE_VIEW, // TODO: choose an action type.
-                "Main Page", // TODO: Define a title for the content shown.
-                // TODO: If you have web page content that matches this app activity's content,
-                // make sure this auto-generated web page URL is correct.
-                // Otherwise, set the URL to null.
-                Uri.parse("http://host/path"),
-                // TODO: Make sure this auto-generated app deep link URI is correct.
-                Uri.parse("android-app://com.beingbrave.thrifter.thrifter/http/host/path")
-        );
-        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
+    public void onRestart(){
+        dataShit.open();
     }
+    */
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
         private final List<Fragment> mFragmentList = new ArrayList<>();
