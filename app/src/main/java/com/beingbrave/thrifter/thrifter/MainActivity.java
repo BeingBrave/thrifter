@@ -1,11 +1,17 @@
 package com.beingbrave.thrifter.thrifter;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.content.Intent;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -16,10 +22,18 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.koushikdutta.async.future.FutureCallback;
+import com.koushikdutta.ion.Ion;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -34,7 +48,8 @@ public class MainActivity extends AppCompatActivity
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private String appToken;
+    public static String appToken;
+    public static LocationManager locationManager;
 
     private int[] tabIcons = {
             R.drawable.ic_search_black_24dp,
@@ -63,7 +78,6 @@ public class MainActivity extends AppCompatActivity
         View v = inflator.inflate(R.layout.app_bar_layout, null);
 
         actionBar.setCustomView(v);
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -137,7 +151,7 @@ public class MainActivity extends AppCompatActivity
         mGoogleApiClient.disconnect();
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if(extras == null) {
+            if (extras == null) {
                 appToken = null;
 
                 Intent intent = new Intent(this, LoginActivity.class);
@@ -148,7 +162,46 @@ public class MainActivity extends AppCompatActivity
         } else {
             appToken = (String) savedInstanceState.getSerializable("TOKEN");
         }
+
         System.out.println(appToken);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        LocationListener locationListener = new MyLocationListener();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this,
+                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                    2);
+        } else {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+        }
+
+//        EditText searchBar = (EditText) findViewById(R.id.search);
+//        searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+//            @Override
+//            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+//                if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+//                        actionId == EditorInfo.IME_ACTION_DONE ||
+//                        event.getAction() == KeyEvent.ACTION_DOWN &&
+//                                event.getKeyCode() == KeyEvent.KEYCODE_ENTER) {
+//                    if (!event.isShiftPressed()) {
+//                        // the user is done typing.
+//
+//                        Intent intent = new Intent(MainActivity.this, ResultActivity.class);
+//                        intent.putExtra("SEARCH", "test");
+//                        startActivity(intent);
+//
+//                        return true; // consume.
+//                    }
+//                }
+//                return false; // pass on to other listeners.
+//            }
+//        });
+    }
+
+    public void fabClick(View view) {
+        Intent intent = new Intent(this, UploadActivity.class);
+        startActivity(intent);
     }
 
     @Override
