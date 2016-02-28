@@ -57,6 +57,6 @@
         android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
-        android:textColor="#ffffff" />/>
+        android:textColor="#ffffff" />
 
 </RelativeLayout>
