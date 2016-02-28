@@ -49,6 +49,7 @@
             android:src="@drawable/ic_add_black_24dp"
             android:layout_marginLeft="@dimen/fab_margin"
             android:layout_marginRight="@dimen/fab_margin"
+            android:layout_marginBottom="@dimen/fab_margin"
             android:layout_above="@+id/button"
             android:layout_alignEnd="@+id/txt_lookingfor"
             android:adjustViewBounds="false"

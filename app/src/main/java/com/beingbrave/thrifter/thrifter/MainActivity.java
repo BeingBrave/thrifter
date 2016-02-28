@@ -93,7 +93,7 @@ public class MainActivity extends AppCompatActivity
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, UploadActivity.class);
+                Intent intent = new Intent(MainActivity.this, CardActivity.class);
                 startActivity(intent);
             }
         });
