@@ -31,6 +31,7 @@ public class StarredFragment extends ListFragment {
         View rootView = inflater.inflate(R.layout.content_starred, container,
                 false);
 
+        // TODO I guess the data is fetched here
         String[] values = new String[]{"Message1", "Message2", "Message3"};
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_list_item_1, values);
