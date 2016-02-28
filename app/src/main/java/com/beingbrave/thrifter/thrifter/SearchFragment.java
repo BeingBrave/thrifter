@@ -47,7 +47,7 @@ public class SearchFragment extends Fragment{
                         &&(!event.isShiftPressed()))
                     {
                         // the user is done typing.
-                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        Intent intent = new Intent(getActivity(), ResultActivity.class);
                         intent.putExtra("SEARCH", "test");
                         startActivity(intent); //wrong line
 

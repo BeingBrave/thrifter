@@ -28,12 +28,11 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Button"
+        android:text="Random"
         android:id="@+id/button"
-        android:layout_marginBottom="86dp"
         android:background="@color/ui_appBar"
         android:onClick="onSearchAnyClick"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView3"
         android:layout_centerHorizontal="true" />
     <EditText
         android:layout_width="fill_parent"
@@ -58,6 +57,7 @@
         android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="49dp"
-        android:textColor="#ffffff" />
+        android:textColor="#ffffff"
+        android:visibility="invisible" />
 
 </RelativeLayout>

@@ -10,7 +10,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.beingbrave.thrifter.thrifter.StarredActivity"
-    tools:showIn="@layout/activity_starred">
+    tools:showIn="@layout/activity_starred"
+    android:background="@color/accent_colour">
 
     <ListView
         android:layout_width="wrap_content"

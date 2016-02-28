@@ -37,22 +37,18 @@ public class ResultActivity extends AppCompatActivity {
 
         al = new ArrayList<ItemModel>();
 
-        Ion.with(getApplicationContext())
-                .load("http://178.62.117.169:3333/search?access_token=" + MainActivity.appToken)
-                .setBodyParameter("lat", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLatitude()) : "0")
-                .setBodyParameter("lon", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLongitude()) : "0")
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        for (JsonElement obj : result) {
-                            JsonObject object = obj.getAsJsonObject();
-                            String name = object.get("name").toString();
-                            String imageHash = object.get("imageHash").toString();
-                            al.add(new ItemModel(name, imageHash));
-                        }
-                    }
-                });
+
+//        Ion.with(getApplicationContext())
+//                .load("http://178.62.117.169:3333/search?access_token=" + MainActivity.appToken)
+//                .setBodyParameter("lat", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLatitude()) : "0")
+//                .setBodyParameter("lon", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLongitude()) : "0")
+//                .asJsonArray()
+//                .setCallback(new FutureCallback<JsonArray>() {
+//                    @Override
+//                    public void onCompleted(Exception e, JsonArray result) {
+//                        //System.out.println(result.toString());
+//                    }
+//                });
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.cardFrame);
 
