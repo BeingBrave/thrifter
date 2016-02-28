@@ -11,7 +11,8 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.beingbrave.thrifter.thrifter.MainActivity"
     tools:showIn="@layout/app_bar_main"
-    android:background="@color/colorAccent">
+    android:background="@color/colorAccent"
+    android:clickable="false">
 
     <TextView
         android:layout_width="wrap_content"
@@ -31,7 +32,8 @@
         android:id="@+id/button"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
-        android:layout_marginBottom="141dp" />
+        android:layout_marginBottom="141dp"
+        android:background="@color/ui_appBar" />
     <EditText
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -41,11 +43,6 @@
         android:id="@+id/search"
         android:layout_marginTop="15dp"
         android:layout_below="@+id/txt_lookingfor"
-<<<<<<< HEAD
-        android:layout_alignParentStart="true" />
-
-</RelativeLayout>
-=======
         android:layout_alignParentStart="true"
         android:drawableRight="@drawable/ic_search_black_24dp"
         android:singleLine="true" />
@@ -62,6 +59,4 @@
         android:layout_marginTop="49dp"
         android:textColor="#ffffff" />/>
 
-
 </RelativeLayout>
->>>>>>> cdd11d3... made a upload activity. and some new shizzles on the main fo shizzles
