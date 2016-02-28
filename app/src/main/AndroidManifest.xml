@@ -49,11 +49,6 @@
             android:name=".UploadActivity"
             android:label="@string/title_activity_upload"
             android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".CardActivity"
-            android:label="@string/title_activity_card"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
     </application>
 
 </manifest>

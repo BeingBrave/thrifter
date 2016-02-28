@@ -12,16 +12,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
+
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
 
-    private ArrayList<String> al;
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayList<ItemModel> al;
+    private CardAdapter arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +35,8 @@ public class ResultActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        al = new ArrayList<ItemModel>();
+
         Ion.with(getApplicationContext())
                 .load("http://178.62.117.169:3333/search?access_token=" + MainActivity.appToken)
                 .setBodyParameter("lat", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLatitude()) : "0")
@@ -39,23 +45,22 @@ public class ResultActivity extends AppCompatActivity {
                 .setCallback(new FutureCallback<JsonArray>() {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
-                        //System.out.println(result.toString());
+                        for (JsonElement obj : result) {
+                            JsonObject object = obj.getAsJsonObject();
+                            String name = object.get("name").toString();
+                            String imageHash = object.get("imageHash").toString();
+                            al.add(new ItemModel(name, imageHash));
+                        }
                     }
                 });
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.cardFrame);
 
-        al = new ArrayList<String>();
-        al.add("php");
-        al.add("c");
-        al.add("python");
-        al.add("java");
-
         //choose your favorite adapter
-        arrayAdapter = new ArrayAdapter<String>(this, R.layout.card, R.id.cardText, al );
+        arrayAdapter = new CardAdapter(al);
 
         //set the listener and the adapter
-        flingContainer.setAdapter(arrayAdapter);
+        //flingContainer.setAdapter(arrayAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
