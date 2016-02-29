@@ -1,4 +1,4 @@
-package com.beingbrave.thrifter.thrifter;
+package com.beingbrave.thrifter.thrifter.model;
 
 import android.content.ClipData;
 import android.widget.ImageView;

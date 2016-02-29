@@ -1,4 +1,4 @@
-package com.beingbrave.thrifter.thrifter;
+package com.beingbrave.thrifter.thrifter.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.beingbrave.thrifter.thrifter.R;
+import com.beingbrave.thrifter.thrifter.ResultActivity;
 
 
 public class SearchFragment extends Fragment{
@@ -31,25 +32,23 @@ public class SearchFragment extends Fragment{
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.content_main, container, false);
 
-        //search code
-
         EditText searchBar = (EditText) view.findViewById(R.id.search);
         searchBar.setOnEditorActionListener(new TextView.OnEditorActionListener()
         {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event)
             {
-                if
-                        ((actionId == EditorInfo.IME_ACTION_SEARCH)
+
+                if ((actionId == EditorInfo.IME_ACTION_SEARCH)
                         || (actionId == EditorInfo.IME_ACTION_DONE)
                         || (event.getAction() == KeyEvent.ACTION_DOWN)
                         && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)
-                        &&(!event.isShiftPressed()))
-                    {
+                        &&(!event.isShiftPressed())) {
+
                         // the user is done typing.
                         Intent intent = new Intent(getActivity(), ResultActivity.class);
                         intent.putExtra("SEARCH", "test");
-                        startActivity(intent); //wrong line
+                        startActivity(intent);
 
                         return true; // consume.
                     }
@@ -59,8 +58,6 @@ public class SearchFragment extends Fragment{
                 }
             }
         });
-
-        //search code
 
         return view;
     }

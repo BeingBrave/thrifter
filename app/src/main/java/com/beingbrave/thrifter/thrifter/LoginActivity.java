@@ -12,9 +12,8 @@ import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 
-
 /**
- * A login screen that offers login via email/password.
+ * A login screen that offers login via facebook
  */
 public class LoginActivity extends FragmentActivity {
 
@@ -28,20 +27,17 @@ public class LoginActivity extends FragmentActivity {
     }
 
     public void onToken(String token) {
-        Ion.with(getApplicationContext())
-                .load("http://178.62.117.169:3333/auth/facebook?access_token=" + token)
-                .asJsonArray()
-                .setCallback(new FutureCallback<JsonArray>() {
-                    @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        String appToken = ((JsonObject) result.get(0)).get("access_token").toString();
+        ((ThrifterApplication) getApplicationContext()).api.requestFacebookLogin(token, new FutureCallback<JsonArray>() {
+            @Override
+            public void onCompleted(Exception e, JsonArray result) {
+                String appToken = ((JsonObject) result.get(0)).get("access_token").toString();
 
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                        intent.putExtra("TOKEN", appToken);
-                        startActivity(intent);
-                    }
-                });
+                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("TOKEN", appToken);
+                startActivity(intent);
+            }
+        });
     }
 }
 

@@ -3,11 +3,9 @@ package com.beingbrave.thrifter.thrifter;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.location.Location;
 import android.content.Intent;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -22,18 +20,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
+import com.beingbrave.thrifter.thrifter.api.ThrifterApi;
+import com.beingbrave.thrifter.thrifter.fragments.ProfileFragment;
+import com.beingbrave.thrifter.thrifter.fragments.SearchFragment;
+import com.beingbrave.thrifter.thrifter.fragments.StarredFragment;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -47,9 +41,6 @@ public class MainActivity extends AppCompatActivity
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-
-    public static String appToken;
-    public static LocationManager locationManager;
 
     private int[] tabIcons = {
             R.drawable.ic_search_black_24dp,
@@ -73,14 +64,13 @@ public class MainActivity extends AppCompatActivity
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setDisplayShowCustomEnabled(true);
 
         LayoutInflater inflator = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View v = inflator.inflate(R.layout.app_bar_layout, null);
-
         actionBar.setCustomView(v);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -156,28 +146,13 @@ public class MainActivity extends AppCompatActivity
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if (extras == null) {
-                appToken = null;
-
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             } else {
-                appToken = extras.getString("TOKEN");
+                ((ThrifterApplication) getApplicationContext()).api.setAppToken(extras.getString("TOKEN"));
             }
         } else {
-            appToken = (String) savedInstanceState.getSerializable("TOKEN");
-        }
-
-        System.out.println(appToken);
-
-        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-
-        LocationListener locationListener = new MyLocationListener();
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    2);
-        } else {
-            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
+            ((ThrifterApplication) getApplicationContext()).api.setAppToken(savedInstanceState.getSerializable("TOKEN").toString());
         }
 
         /* Create and open database
@@ -187,28 +162,12 @@ public class MainActivity extends AppCompatActivity
         */
     }
 
-    /*
-    public void getItemIDString(String token) {
-
-        for (int i = 0; i < identifiers.size(); i++) {
-            Ion.with(getApplicationContext())
-                    .load("http://178.62.117.169:3333/item/" + identifiers.get(i) + "?access_token=" + appToken)
-                    .asJsonArray()
-                    .setCallback(new FutureCallback<JsonArray>() {
-                        @Override
-                        public void onCompleted(Exception e, JsonArray result) {
-                            itemNames.add(i, ((JsonObject) result.get(0)).get("name").toString());
-                        }
-                    });
-        }
-    } */
-
-    public void onSearchAnyClick(View view) {
+    public void onSearchClick(View view) {
         Intent intent = new Intent(this, ResultActivity.class);
         startActivity(intent);
     }
 
-    public void fabClick(View view) {
+    public void onUploadClick(View view) {
         Intent intent = new Intent(this, UploadActivity.class);
         startActivity(intent);
     }

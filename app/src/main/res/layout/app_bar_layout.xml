@@ -5,12 +5,13 @@
     android:id="@+id/layout">
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Thrifter         "
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="Thrifter"
         android:textAlignment="center"
         android:textSize="11pt"
-        android:textColor="@color/colorAccent" />
+        android:textColor="@color/colorAccent"
+        android:layout_centerHorizontal="true" />
 
     <ImageView
         android:id="@+id/imageView4"

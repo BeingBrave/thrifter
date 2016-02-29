@@ -1,4 +1,4 @@
-package com.beingbrave.thrifter.thrifter;
+package com.beingbrave.thrifter.thrifter.fragments;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -8,22 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.beingbrave.thrifter.thrifter.LoginActivity;
+import com.beingbrave.thrifter.thrifter.R;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
-import com.facebook.FacebookSdk;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link LoginFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link LoginFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class LoginFragment extends Fragment {
 
     private LoginButton loginButton;
@@ -44,10 +36,7 @@ public class LoginFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(
-            LayoutInflater inflater,
-            ViewGroup container,
-            Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         callbackManager = CallbackManager.Factory.create();

@@ -11,33 +11,24 @@
     tools:context="com.beingbrave.thrifter.thrifter.LoginActivity"
     android:weightSum="1">
 
-    <!-- Login progress -->
-    <ProgressBar
-        android:id="@+id/login_progress"
-        style="?android:attr/progressBarStyleLarge"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:visibility="gone" />
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Thrifter"
-        android:id="@+id/textView2"
+        android:id="@+id/login_logo"
         android:textColor="#ffffff"
         android:textSize="42dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="151dp"
-        android:layout_above="@+id/fragment"
+        android:layout_marginBottom="150dp"
+        android:layout_above="@+id/login_fragment"
         android:layout_centerHorizontal="true" />
 
     <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:name="com.beingbrave.thrifter.thrifter.LoginFragment"
-        android:id="@+id/fragment"
+        android:name="com.beingbrave.thrifter.thrifter.fragments.LoginFragment"
+        android:id="@+id/login_fragment"
         android:layout_gravity="center_horizontal"
         tools:layout="@layout/fragment_login"
         android:layout_alignParentBottom="true"

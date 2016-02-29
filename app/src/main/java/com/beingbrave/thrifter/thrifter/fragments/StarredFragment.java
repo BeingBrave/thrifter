@@ -1,4 +1,4 @@
-package com.beingbrave.thrifter.thrifter;
+package com.beingbrave.thrifter.thrifter.fragments;
 
 import android.app.ListFragment;
 import android.content.Intent;

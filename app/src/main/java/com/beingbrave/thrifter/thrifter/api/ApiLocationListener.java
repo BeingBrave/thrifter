@@ -1,4 +1,4 @@
-package com.beingbrave.thrifter.thrifter;
+package com.beingbrave.thrifter.thrifter.api;
 
 import android.location.Location;
 import android.location.LocationListener;
@@ -7,9 +7,13 @@ import android.os.Bundle;
 /**
  * Created by ryant on 28/02/2016.
  */
-public class MyLocationListener implements LocationListener {
+public class ApiLocationListener implements LocationListener {
 
-    public static Location curentLocation;
+    private Location curentLocation;
+
+    public Location getCurentLocation() {
+        return curentLocation;
+    }
 
     @Override
     public void onLocationChanged(Location location) {

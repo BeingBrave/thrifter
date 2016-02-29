@@ -1,5 +1,6 @@
 package com.beingbrave.thrifter.thrifter;
 
+import android.content.ClipData;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,6 +12,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
+import com.beingbrave.thrifter.thrifter.adapters.CardAdapter;
+import com.beingbrave.thrifter.thrifter.model.ItemModel;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -20,50 +23,54 @@ import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
 import org.json.JSONObject;
 
+import java.io.File;
 import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
 
+    private static final String TAG = "ResultActivity";
+
     private ArrayList<ItemModel> al;
-    private CardAdapter arrayAdapter;
+    private CardAdapter cardAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_result);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        al = new ArrayList<ItemModel>();
+        al = new ArrayList<>();
 
+        ((ThrifterApplication) getApplicationContext()).api.requestSearch(
+                new FutureCallback<JsonArray>() {
+                    @Override
+                    public void onCompleted(Exception e, JsonArray result) {
+                        if(result != null) {
+                            Log.d(TAG, result.toString());
+                        }
+                    }
+                }
+        );
 
-//        Ion.with(getApplicationContext())
-//                .load("http://178.62.117.169:3333/search?access_token=" + MainActivity.appToken)
-//                .setBodyParameter("lat", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLatitude()) : "0")
-//                .setBodyParameter("lon", MyLocationListener.curentLocation != null ? String.valueOf(MyLocationListener.curentLocation.getLongitude()) : "0")
-//                .asJsonArray()
-//                .setCallback(new FutureCallback<JsonArray>() {
-//                    @Override
-//                    public void onCompleted(Exception e, JsonArray result) {
-//                        //System.out.println(result.toString());
-//                    }
-//                });
+        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.card_frame);
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.cardFrame);
+        // Test data
+        al.add(new ItemModel("Test", "hi"));
 
         //choose your favorite adapter
-        arrayAdapter = new CardAdapter(al);
+        cardAdapter = new CardAdapter(this, al);
 
-        //set the listener and the adapter
-        //flingContainer.setAdapter(arrayAdapter);
+        flingContainer.setAdapter(cardAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
                 // this is the simplest way to delete an object from the Adapter (/AdapterView)
                 Log.d("LIST", "removed object!");
                 al.remove(0);
-                arrayAdapter.notifyDataSetChanged();
+                cardAdapter.notifyDataSetChanged();
             }
 
             @Override
