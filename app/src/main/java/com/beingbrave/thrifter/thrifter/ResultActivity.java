@@ -48,6 +48,7 @@ public class ResultActivity extends AppCompatActivity {
                 new FutureCallback<JsonArray>() {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
+                        Log.d(TAG, "Hi");
                         if(result != null) {
                             Log.d(TAG, result.toString());
                         }

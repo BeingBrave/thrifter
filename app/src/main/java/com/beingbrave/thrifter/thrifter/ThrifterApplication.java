@@ -9,6 +9,8 @@ public class ThrifterApplication extends Application {
 
     @Override
     public void onCreate() {
+        super.onCreate();
+
         api = new ThrifterApi(this);
     }
 }

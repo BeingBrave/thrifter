@@ -1,12 +1,14 @@
 package com.beingbrave.thrifter.thrifter.api;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
+import android.util.Log;
 import android.widget.ImageView;
 
 import com.beingbrave.thrifter.thrifter.MainActivity;
@@ -20,6 +22,8 @@ import java.io.File;
 
 public class ThrifterApi {
 
+    private static final String TAG = "ThrifterAPI";
+
     private String appToken;
     private Context context;
     private LocationManager locationManager;
@@ -30,24 +34,20 @@ public class ThrifterApi {
 
     public ThrifterApi(Context context) {
         this.context = context;
-
-        initialize();
     }
 
     public ThrifterApi(Context context, String appToken) {
         this.context = context;
         setAppToken(appToken);
-
-        initialize();
     }
 
-    public void initialize() {
+    public void initialize(Activity activity) {
         locationManager = (LocationManager) context.getSystemService(Context.LOCATION_SERVICE);
 
         locationListener = new ApiLocationListener();
         if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions((MainActivity) context,
+            ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
                     2);
         } else {
@@ -58,10 +58,12 @@ public class ThrifterApi {
     }
 
     public void setAppToken(String appToken) {
+        Log.d(TAG, "App token: " + appToken);
         this.appToken = appToken;
     }
 
     public void requestFacebookLogin(String token, FutureCallback<JsonArray> callback) {
+        Log.d(TAG, "Facebook token: " + token);
         Ion.with(context)
                 .load(endPoint + "/auth/facebook?access_token=" + token)
                 .asJsonArray()
