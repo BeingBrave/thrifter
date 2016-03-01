@@ -1,15 +1,11 @@
 package com.beingbrave.thrifter.thrifter;
 
-import android.content.ClipData;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import com.beingbrave.thrifter.thrifter.adapters.CardAdapter;
@@ -18,12 +14,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
-import com.koushikdutta.ion.Ion;
 import com.lorentzos.flingswipe.SwipeFlingAdapterView;
 
-import org.json.JSONObject;
-
-import java.io.File;
 import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
@@ -32,6 +24,7 @@ public class ResultActivity extends AppCompatActivity {
 
     private ArrayList<ItemModel> al;
     private CardAdapter cardAdapter;
+    private SwipeFlingAdapterView flingContainer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +63,7 @@ public class ResultActivity extends AppCompatActivity {
                 }
         );
 
-        SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.card_frame);
+        flingContainer = (SwipeFlingAdapterView) findViewById(R.id.card_frame);
 
         cardAdapter = new CardAdapter(this, al);
 
@@ -84,14 +77,14 @@ public class ResultActivity extends AppCompatActivity {
 
             @Override
             public void onLeftCardExit(Object dataObject) {
-                //Do something on the left!
-                //You also have access to the original object.
-                //If you want to use it just cast it (String) dataObject
+                //ItemModel item = (ItemModel) dataObject;
                 Toast.makeText(ResultActivity.this, "Disliked", Toast.LENGTH_SHORT).show();
+                Snackbar.make(findViewById(android.R.id.content), "Disliked", Snackbar.LENGTH_LONG).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
+                //ItemModel item = (ItemModel) dataObject;
                 Toast.makeText(ResultActivity.this, "Liked", Toast.LENGTH_SHORT).show();
             }
 
@@ -108,14 +101,14 @@ public class ResultActivity extends AppCompatActivity {
 
             }
         });
+    }
 
-//        // Optionally add an OnItemClickListener
-//        flingContainer.setOnItemClickListener(new SwipeFlingAdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClicked(int itemPosition, Object dataObject) {
-//                makeToast(MyActivity.this, "Clicked!");
-//            }
-//        });
+    public void onLikeClick(View v) {
+        flingContainer.getTopCardListener().selectRight();
+    }
+
+    public void onDislikeClick(View v) {
+        flingContainer.getTopCardListener().selectLeft();
     }
 
 }

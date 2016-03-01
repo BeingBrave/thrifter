@@ -39,7 +39,7 @@ public class LoginActivity extends FragmentActivity {
                     return;
                 }
 
-                JsonObject resultObject = result.getAsJsonObject("data");
+                JsonObject resultObject = result.getAsJsonArray("data").get(0).getAsJsonObject();
                 String appToken = resultObject.get("access_token").getAsString();
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);

@@ -176,6 +176,7 @@ public class MainActivity extends AppCompatActivity
 
             }
         } else {
+            System.out.println(savedInstanceState.toString());
             ((ThrifterApplication) getApplicationContext()).api.setAppToken(savedInstanceState.getSerializable("TOKEN").toString());
         }
 
