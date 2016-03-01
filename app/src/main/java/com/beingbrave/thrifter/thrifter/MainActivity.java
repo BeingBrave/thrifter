@@ -168,11 +168,12 @@ public class MainActivity extends AppCompatActivity
         mGoogleApiClient.disconnect();
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
-            if (extras == null) {
+            if (extras == null || extras.getString("TOKEN") == null) {
                 Intent intent = new Intent(this, LoginActivity.class);
                 startActivity(intent);
             } else {
                 ((ThrifterApplication) getApplicationContext()).api.setAppToken(extras.getString("TOKEN"));
+
             }
         } else {
             ((ThrifterApplication) getApplicationContext()).api.setAppToken(savedInstanceState.getSerializable("TOKEN").toString());

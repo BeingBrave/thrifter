@@ -20,6 +20,7 @@ import android.widget.EditText;
 
 import com.beingbrave.thrifter.thrifter.api.ApiLocationListener;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.nononsenseapps.filepicker.FilePickerActivity;
@@ -62,14 +63,18 @@ public class UploadActivity extends AppCompatActivity {
         ((ThrifterApplication) getApplicationContext()).api.requestUpload(
                 editTitle.getText().toString(),
                 new File(selectedImagePath),
-                new FutureCallback<JsonArray>() {
+                new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonArray result) {
+                    public void onCompleted(Exception e, JsonObject result) {
                         if(e != null) {
                             e.printStackTrace();
                             return;
                         }
-                        System.out.println(result.toString());
+
+                        if(result.get("error") != null) {
+                            return;
+                        }
+
                         Intent intent = new Intent(UploadActivity.this, MainActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                         startActivity(intent);

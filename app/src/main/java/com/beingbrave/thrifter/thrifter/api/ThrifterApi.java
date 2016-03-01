@@ -15,9 +15,11 @@ import com.beingbrave.thrifter.thrifter.MainActivity;
 import com.beingbrave.thrifter.thrifter.UploadActivity;
 import com.beingbrave.thrifter.thrifter.model.ItemModel;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.koushikdutta.ion.Response;
+import com.koushikdutta.ion.builder.Builders;
 
 import java.io.File;
 
@@ -69,41 +71,37 @@ public class ThrifterApi {
         this.appToken = appToken;
     }
 
-    public void requestFacebookLogin(String token, FutureCallback<JsonArray> callback) {
+    public void requestFacebookLogin(String token, FutureCallback<JsonObject> callback) {
         Log.d(TAG, "Facebook token: " + token);
         Ion.with(context)
                 .load(endPoint + "/auth/facebook?access_token=" + token)
-                .asJsonArray()
+                .asJsonObject()
                 .setCallback(callback);
     }
 
-    public void requestUpload(String name, File file, FutureCallback<JsonArray> callback) {
-        System.out.println("Hi " + file.getAbsolutePath());
+    public void requestUpload(String name, File file, FutureCallback<JsonObject> callback) {
+
+        double latitude = 0;
+        double longitude = 0;
         if(locationListener != null && locationListener.getCurentLocation() != null) {
-            Ion.with(context)
-                    .load(endPoint + "/item?access_token=" + appToken)
-                    .setMultipartFile("file", file)
-                    .setMultipartParameter("lat", String.valueOf(locationListener.getCurentLocation().getLatitude()))
-                    .setMultipartParameter("lon", String.valueOf(locationListener.getCurentLocation().getLongitude()))
-                    .setMultipartParameter("name", name)
-                    .asJsonArray()
-                    .setCallback(callback);
-        } else {
-            Ion.with(context)
-                    .load(endPoint + "/item?access_token=" + appToken)
-                    .setMultipartFile("file", file)
-                    .setMultipartParameter("lat", "0")
-                    .setMultipartParameter("lon", "0")
-                    .setMultipartParameter("name", name)
-                    .asJsonArray()
-                    .setCallback(callback);
+            latitude = locationListener.getCurentLocation().getLatitude();
+            longitude = locationListener.getCurentLocation().getLongitude();
         }
+
+        Ion.with(context)
+                .load(endPoint + "/item?access_token=" + appToken)
+                .setMultipartFile("file", file)
+                .setMultipartParameter("name", name)
+                .setMultipartParameter("lat", String.valueOf(latitude))
+                .setMultipartParameter("lon", String.valueOf(longitude))
+                .asJsonObject()
+                .setCallback(callback);
     }
 
-    public void requestSearch(FutureCallback<JsonArray> callback) {
+    public void requestSearch(FutureCallback<JsonObject> callback) {
         StringBuilder url = new StringBuilder();
         url.append(endPoint + "/search?access_token=" + appToken);
-        url.append("&distance=" + String.valueOf(1000000));
+        url.append("&distance=" + String.valueOf(100000000));
         if(locationListener != null && locationListener.getCurentLocation() != null) {
             url.append("&lat=" + String.valueOf(locationListener.getCurentLocation().getLatitude())
                     + "&lon=" + String.valueOf(locationListener.getCurentLocation().getLongitude()));
@@ -113,14 +111,14 @@ public class ThrifterApi {
         Log.d(TAG, url.toString());
         Ion.with(context)
                 .load(url.toString())
-                .asJsonArray()
+                .asJsonObject()
                 .setCallback(callback);
     }
 
-    public void requestItem(String itemUuid, FutureCallback<JsonArray> callback) {
+    public void requestItem(String itemUuid, FutureCallback<JsonObject> callback) {
         Ion.with(context)
                 .load(endPoint + "/item/" + itemUuid + "?access_token=" + appToken)
-                .asJsonArray()
+                .asJsonObject()
                 .setCallback(callback);
     }
 

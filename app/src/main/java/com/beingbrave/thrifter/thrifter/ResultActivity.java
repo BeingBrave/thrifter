@@ -45,38 +45,39 @@ public class ResultActivity extends AppCompatActivity {
         al = new ArrayList<>();
 
         ((ThrifterApplication) getApplicationContext()).api.requestSearch(
-                new FutureCallback<JsonArray>() {
+                new FutureCallback<JsonObject>() {
                     @Override
-                    public void onCompleted(Exception e, JsonArray result) {
-                        Log.d(TAG, "Hi");
+                    public void onCompleted(Exception e, JsonObject result) {
                         if(e != null) {
                             e.printStackTrace();
                             return;
                         }
-                        if(result != null) {
-                            Log.d(TAG, result.toString());
-                            for(JsonElement element : result) {
-                                JsonObject obj = (JsonObject) element;
 
-                                al.add(new ItemModel(obj.get("name").getAsString(), obj.get("imageHash").getAsString()));
-                            }
-                            cardAdapter.notifyDataSetChanged();
+                        if(result.get("error") != null) {
+                            return;
                         }
+
+                        JsonArray resultObject = result.getAsJsonArray("data");
+                        Log.d(TAG, resultObject.toString());
+                        for(JsonElement element : resultObject) {
+                            JsonObject obj = (JsonObject) element;
+
+                            al.add(new ItemModel(obj.get("name").getAsString(), obj.get("imageHash").getAsString()));
+                        }
+
+                        cardAdapter.notifyDataSetChanged();
                     }
                 }
         );
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.card_frame);
 
-        //choose your favorite adapter
         cardAdapter = new CardAdapter(this, al);
 
         flingContainer.setAdapter(cardAdapter);
         flingContainer.setFlingListener(new SwipeFlingAdapterView.onFlingListener() {
             @Override
             public void removeFirstObjectInAdapter() {
-                // this is the simplest way to delete an object from the Adapter (/AdapterView)
-                Log.d("LIST", "removed object!");
                 al.remove(0);
                 cardAdapter.notifyDataSetChanged();
             }
@@ -86,12 +87,12 @@ public class ResultActivity extends AppCompatActivity {
                 //Do something on the left!
                 //You also have access to the original object.
                 //If you want to use it just cast it (String) dataObject
-                Toast.makeText(ResultActivity.this, "Left!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ResultActivity.this, "Disliked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onRightCardExit(Object dataObject) {
-                Toast.makeText(ResultActivity.this, "Right!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ResultActivity.this, "Liked", Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -115,7 +116,6 @@ public class ResultActivity extends AppCompatActivity {
 //                makeToast(MyActivity.this, "Clicked!");
 //            }
 //        });
-
     }
 
 }

@@ -27,11 +27,20 @@ public class LoginActivity extends FragmentActivity {
     }
 
     public void onToken(String token) {
-        ((ThrifterApplication) getApplicationContext()).api.requestFacebookLogin(token, new FutureCallback<JsonArray>() {
+        ((ThrifterApplication) getApplicationContext()).api.requestFacebookLogin(token, new FutureCallback<JsonObject>() {
             @Override
-            public void onCompleted(Exception e, JsonArray result) {
-                String appToken = ((JsonObject) result.get(0)).get("access_token").getAsString();
-                System.out.println(appToken);
+            public void onCompleted(Exception e, JsonObject result) {
+                if(e != null) {
+                    e.printStackTrace();
+                    return;
+                }
+
+                if(result.get("error") != null) {
+                    return;
+                }
+
+                JsonObject resultObject = result.getAsJsonObject("data");
+                String appToken = resultObject.get("access_token").getAsString();
 
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
