@@ -49,17 +49,24 @@ public class ResultActivity extends AppCompatActivity {
                     @Override
                     public void onCompleted(Exception e, JsonArray result) {
                         Log.d(TAG, "Hi");
+                        if(e != null) {
+                            e.printStackTrace();
+                            return;
+                        }
                         if(result != null) {
                             Log.d(TAG, result.toString());
+                            for(JsonElement element : result) {
+                                JsonObject obj = (JsonObject) element;
+
+                                al.add(new ItemModel(obj.get("name").getAsString(), obj.get("imageHash").getAsString()));
+                            }
+                            cardAdapter.notifyDataSetChanged();
                         }
                     }
                 }
         );
 
         SwipeFlingAdapterView flingContainer = (SwipeFlingAdapterView) findViewById(R.id.card_frame);
-
-        // Test data
-        al.add(new ItemModel("Test", "hi"));
 
         //choose your favorite adapter
         cardAdapter = new CardAdapter(this, al);

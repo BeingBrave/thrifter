@@ -27,13 +27,11 @@ public class StarredFragment extends Fragment {
     // ArrayList<String> itemNames = new ArrayList<String>(); // Item names to be passed on
 
     public StarredFragment() {
-        // Required empty public constructor
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
     }
 

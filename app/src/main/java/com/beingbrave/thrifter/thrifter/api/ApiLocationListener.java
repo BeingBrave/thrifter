@@ -3,6 +3,7 @@ package com.beingbrave.thrifter.thrifter.api;
 import android.location.Location;
 import android.location.LocationListener;
 import android.os.Bundle;
+import android.util.Log;
 
 /**
  * Created by ryant on 28/02/2016.
@@ -17,6 +18,7 @@ public class ApiLocationListener implements LocationListener {
 
     @Override
     public void onLocationChanged(Location location) {
+        Log.d("LocationListener", "Received location");
         curentLocation = location;
     }
 

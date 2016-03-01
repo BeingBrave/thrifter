@@ -34,4 +34,5 @@ dependencies {
     compile 'com.google.android.gms:play-services-appindexing:8.4.0'
     compile 'com.koushikdutta.ion:ion:1.1.5'
     compile 'com.lorentzos.swipecards:library:1.0.9@aar'
+    compile 'com.nononsenseapps:filepicker:2.5.2'
 }

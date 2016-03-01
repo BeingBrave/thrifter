@@ -16,11 +16,9 @@ import com.koushikdutta.ion.Ion;
 
 import java.util.ArrayList;
 
-/**
- * Provide views to RecyclerView with data from mDataSet.
- */
 public class CardAdapter extends BaseAdapter {
     private static final String TAG = "CardAdapter";
+
     private Context context;
 
     private ArrayList<ItemModel> mDataSet;
@@ -47,9 +45,13 @@ public class CardAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Create a new view.
-        View v = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.fragment_card, parent, false);
+        View v;
+        if(convertView == null) {
+            v = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.fragment_card, parent, false);
+        } else {
+            v = convertView;
+        }
 
         ItemModel item = getItem(position);
         TextView title = ((TextView) v.findViewById(R.id.card_title));

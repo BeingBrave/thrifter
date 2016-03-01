@@ -25,6 +25,19 @@
         android:layout_centerHorizontal="true"
         android:textColor="#ffffff" />
 
+    <EditText
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="5dip"
+        android:background="@drawable/edittextround"
+        android:hint="Search"
+        android:id="@+id/search"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/txt_lookingfor"
+        android:layout_alignParentStart="true"
+        android:drawableEnd="@drawable/ic_search_black_24dp"
+        android:singleLine="true" />
+
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,27 +45,15 @@
         android:id="@+id/button"
         android:background="@color/ui_appBar"
         android:onClick="onSearchClick"
-        android:layout_below="@+id/textView3"
-        android:layout_centerHorizontal="true" />
-    <EditText
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:padding="5dip"
-        android:background="@drawable/edittextround"
-        android:text="Search"
-        android:id="@+id/search"
-        android:layout_marginTop="15dp"
-        android:layout_below="@+id/txt_lookingfor"
-        android:layout_alignParentStart="true"
-        android:drawableRight="@drawable/ic_search_black_24dp"
-        android:singleLine="true" />
+        android:layout_centerHorizontal="true"
+        style="?android:attr/borderlessButtonStyle" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Popular"
-        android:id="@+id/textView3"
+        android:id="@+id/main_text_popular"
         android:textSize="30dp"
         android:layout_below="@+id/search"
         android:layout_centerHorizontal="true"

@@ -17,12 +17,14 @@ import com.beingbrave.thrifter.thrifter.model.ItemModel;
 import com.google.gson.JsonArray;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.Response;
 
 import java.io.File;
 
 public class ThrifterApi {
 
     private static final String TAG = "ThrifterAPI";
+    private static final int REQUEST_LOCATION = 1;
 
     private String appToken;
     private Context context;
@@ -30,6 +32,8 @@ public class ThrifterApi {
     private boolean isInitialized = false;
 
     private final String endPoint = "http://178.62.117.169:3333";
+    //private final String endPoint = "https://thrifter.ryanwelch.me";
+
     private ApiLocationListener locationListener;
 
     public ThrifterApi(Context context) {
@@ -49,8 +53,11 @@ public class ThrifterApi {
                 && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(activity,
                     new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    2);
+                    REQUEST_LOCATION);
+
+            // TODO: Wait for allow access, then reinitialize locationManager
         } else {
+            Log.d(TAG, "Setup location listener");
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 10, locationListener);
         }
 
@@ -70,26 +77,40 @@ public class ThrifterApi {
                 .setCallback(callback);
     }
 
-    public void requestUpload(File file, FutureCallback<JsonArray> callback) {
-        Ion.with(context)
-                .load(endPoint + "/item?access_token=" + appToken)
-                .setMultipartFile("upload", file)
-                .setMultipartParameter("lat", String.valueOf(locationListener.getCurentLocation().getLatitude()))
-                .setMultipartParameter("lon", String.valueOf(locationListener.getCurentLocation().getLongitude()))
-                .setMultipartParameter("name", "lol")
-                .asJsonArray()
-                .setCallback(callback);
+    public void requestUpload(String name, File file, FutureCallback<JsonArray> callback) {
+        System.out.println("Hi " + file.getAbsolutePath());
+        if(locationListener != null && locationListener.getCurentLocation() != null) {
+            Ion.with(context)
+                    .load(endPoint + "/item?access_token=" + appToken)
+                    .setMultipartFile("file", file)
+                    .setMultipartParameter("lat", String.valueOf(locationListener.getCurentLocation().getLatitude()))
+                    .setMultipartParameter("lon", String.valueOf(locationListener.getCurentLocation().getLongitude()))
+                    .setMultipartParameter("name", name)
+                    .asJsonArray()
+                    .setCallback(callback);
+        } else {
+            Ion.with(context)
+                    .load(endPoint + "/item?access_token=" + appToken)
+                    .setMultipartFile("file", file)
+                    .setMultipartParameter("lat", "0")
+                    .setMultipartParameter("lon", "0")
+                    .setMultipartParameter("name", name)
+                    .asJsonArray()
+                    .setCallback(callback);
+        }
     }
 
     public void requestSearch(FutureCallback<JsonArray> callback) {
         StringBuilder url = new StringBuilder();
         url.append(endPoint + "/search?access_token=" + appToken);
-        url.append("&distance=" + String.valueOf(100));
+        url.append("&distance=" + String.valueOf(1000000));
         if(locationListener != null && locationListener.getCurentLocation() != null) {
             url.append("&lat=" + String.valueOf(locationListener.getCurentLocation().getLatitude())
                     + "&lon=" + String.valueOf(locationListener.getCurentLocation().getLongitude()));
+        } else {
+            url.append("&lat=0&lon=0");
         }
-
+        Log.d(TAG, url.toString());
         Ion.with(context)
                 .load(url.toString())
                 .asJsonArray()
@@ -104,7 +125,8 @@ public class ThrifterApi {
     }
 
     public void loadImage(String imageHash, ImageView view) {
+        System.out.println(endPoint + "/static/" + imageHash + "?access_token=" + appToken);
         Ion.with(view)
-                .load(endPoint + "/static/" + imageHash);
+                .load(endPoint + "/static/" + imageHash + "?access_token=" + appToken);
     }
 }
