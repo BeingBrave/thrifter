@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "144916866646",
+    "firebase_url": "https://thrifter-adad1.firebaseio.com",
+    "project_id": "thrifter-adad1",
+    "storage_bucket": "thrifter-adad1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:144916866646:android:7a2f9569e1ce4dd4",
+        "android_client_info": {
+          "package_name": "com.beingbrave.thrifter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "144916866646-6f2gnv6mjk8d4kog9cqnir4h3kqi19sl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwp9kJzH8BEoOtp_er-BZUOUcYWaS3w3M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

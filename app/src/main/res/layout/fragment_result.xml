@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              app:layout_behavior="@string/appbar_scrolling_view_behavior"
+              tools:context=".activities.ResultActivity"
+              tools:showIn="@layout/activity_result"
+              android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16sp">
+
+        <TextView
+            android:id="@+id/txt_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Within 500m "
+            android:textColor="@color/colorAccent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true" />
+
+        <ImageView
+            android:id="@+id/img_drop_arrow"
+            android:layout_width="18dp"
+            android:layout_height="18dp"
+            android:background="@drawable/ic_arrow_drop_down_black"
+            android:layout_alignBottom="@+id/textView2"
+            android:layout_alignEnd="@+id/fab_clear" />
+
+    </LinearLayout>
+
+    <com.lorentzos.flingswipe.SwipeFlingAdapterView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_frame"
+        android:layout_width="360sp"
+        android:layout_height="360sp"
+        android:layout_gravity="center"
+        app:rotation_degrees="16"
+        app:max_visible="4"
+        app:min_adapter_stack="6"
+        android:background="#dddddd"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:layout_marginLeft="60sp"
+        android:layout_marginRight="60sp"
+        >
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/result_button_dislike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_close_black"
+            android:onClick="onDislikeClick"
+            android:layout_alignParentLeft="true"
+            android:layout_gravity="left"
+            />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/result_button_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_check_black"
+            android:onClick="onLikeClick"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="right"
+            />
+    </RelativeLayout>
+
+</LinearLayout>

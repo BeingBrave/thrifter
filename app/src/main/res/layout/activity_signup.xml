@@ -4,9 +4,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".activities.LoginActivity">
+    tools:context=".activities.SignupActivity">
 
-    <include layout="@layout/fragment_login" />
+    <include layout="@layout/fragment_signup" />
 
     <ProgressBar
         android:id="@+id/progress_bar"

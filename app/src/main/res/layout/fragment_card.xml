@@ -3,28 +3,27 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="400dp"
-            android:layout_height="300dp"
-            android:id="@+id/card_image"
-            android:background="#dddddd"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="74dp" />
+    <ImageView
+        android:id="@+id/card_image"
+        android:layout_width="400dp"
+        android:layout_height="300dp"
+        android:background="#dddddd"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="74dp" />
 
     <TextView
+        android:id="@+id/card_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text=""
-        android:id="@+id/card_title"
         android:layout_alignTop="@id/card_image"
         android:layout_alignEnd="@id/card_image"
         android:textAlignment="center"
-        android:background="@color/accent_colour"
-        android:textColor="@color/text_tag"
+        android:background="@color/colorAccent"
         android:layout_alignStart="@id/card_image" />
 
 </RelativeLayout>
