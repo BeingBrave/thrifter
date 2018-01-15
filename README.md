@@ -34,3 +34,6 @@ Learn how to [contribute](https://github.com/BeingBrave/thrifter/blob/master/CON
 
 All code is copyrighted by the BeingBrave team unless explicitly stated otherwise.
 All rights reserved.
+
+## Preview
+!["Preview of Design"](/thifter-designs.jpg "Preview of Design")
